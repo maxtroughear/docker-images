@@ -1,0 +1,33 @@
+image: docker:latest
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: "/certs"
+
+# setup dynamic variables
+default:
+  before_script:
+    - |
+      if [[ -z "$CI_COMMIT_TAG" ]]; then
+        export CI_APPLICATION_REPOSITORY=${CI_APPLICATION_REPOSITORY:-$CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG}
+        export CI_APPLICATION_TAG=${CI_APPLICATION_TAG:-$CI_COMMIT_SHA}
+      else
+        export CI_APPLICATION_REPOSITORY=${CI_APPLICATION_REPOSITORY:-$CI_REGISTRY_IMAGE}
+        export CI_APPLICATION_TAG=${CI_APPLICATION_TAG:-$CI_COMMIT_TAG}
+      fi
+
+stages:
+  - build
+
+alpine-curl:
+  stage: build
+  script:
+    - cd ./Alpine-Curl
+    - docker login -u "${CI_REGISTRY_USER}" -p "${CI_REGISTRY_PASSWORD}" "${CI_REGISTRY}"
+    - >
+      docker build
+      -t "${CI_APPLICATION_REPOSITORY}/alpine-curl:latest"
+      -t "${CI_APPLICATION_REPOSITORY}/alpine-curl:${CI_COMMIT_SHA}"
+      .
+    - docker push "${CI_APPLICATION_REPOSITORY}/alpine-curl:latest"
+    - docker push "${CI_APPLICATION_REPOSITORY}/alpine-curl:${CI_COMMIT_SHA}"
