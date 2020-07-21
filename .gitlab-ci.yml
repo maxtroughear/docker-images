@@ -22,7 +22,6 @@ stages:
   - build
 
 alpine-curl:
-  stage: build
   script:
     - cd ./Alpine-Curl
     - docker login -u "${CI_REGISTRY_USER}" -p "${CI_REGISTRY_PASSWORD}" "${CI_REGISTRY}"
