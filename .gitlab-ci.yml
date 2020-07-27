@@ -10,15 +10,23 @@ variables:
 stages:
   - build
 
-alpine-curl:
+.build:
   stage: build
   script:
-    - cd ./Alpine-Curl
+    - cd "./${BUILD_DIR}"
     - docker login -u "${CI_REGISTRY_USER}" -p "${CI_REGISTRY_PASSWORD}" "${CI_REGISTRY}"
     - >
+      docker image pull "${CI_APPLICATION_REPOSITORY}-${BUILD_NAME}:latest" ||
+      true
+    - >
       docker build
-      -t "${CI_REGISTRY_IMAGE}/alpine-curl:latest"
-      -t "${CI_REGISTRY_IMAGE}/alpine-curl:${CI_COMMIT_SHA}"
+      --cache-from "${CI_APPLICATION_REPOSITORY}-${BUILD_NAME}:latest"
+      -t "${CI_APPLICATION_REPOSITORY}-${BUILD_NAME}:latest"
       .
-    - docker push "${CI_REGISTRY_IMAGE}/alpine-curl:latest"
-    - docker push "${CI_REGISTRY_IMAGE}/alpine-curl:${CI_COMMIT_SHA}"
+    - docker push "${CI_APPLICATION_REPOSITORY}-${BUILD_NAME}:latest"
+
+alpine-curl:
+  extends: .deploy
+  variables:
+    BUILD_DIR: "Alpine-Curl"
+    BUILD_NAME: "alpine-curl"
