@@ -16,14 +16,14 @@ stages:
     - cd "./${BUILD_DIR}"
     - docker login -u "${CI_REGISTRY_USER}" -p "${CI_REGISTRY_PASSWORD}" "${CI_REGISTRY}"
     - >
-      docker image pull "${CI_REGISTRY_IMAGE}-${BUILD_NAME}:latest" ||
+      docker image pull "${CI_REGISTRY_IMAGE}/${BUILD_NAME}:latest" ||
       true
     - >
       docker build
-      --cache-from "${CI_REGISTRY_IMAGE}-${BUILD_NAME}:latest"
-      -t "${CI_REGISTRY_IMAGE}-${BUILD_NAME}:latest"
+      --cache-from "${CI_REGISTRY_IMAGE}/${BUILD_NAME}:latest"
+      -t "${CI_REGISTRY_IMAGE}/${BUILD_NAME}:latest"
       .
-    - docker push "${CI_REGISTRY_IMAGE}-${BUILD_NAME}:latest"
+    - docker push "${CI_REGISTRY_IMAGE}/${BUILD_NAME}:latest"
 
 alpine-curl:
   extends: .build
