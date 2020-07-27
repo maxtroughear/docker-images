@@ -26,7 +26,7 @@ stages:
     - docker push "${CI_APPLICATION_REPOSITORY}-${BUILD_NAME}:latest"
 
 alpine-curl:
-  extends: .deploy
+  extends: .build
   variables:
     BUILD_DIR: "Alpine-Curl"
     BUILD_NAME: "alpine-curl"
