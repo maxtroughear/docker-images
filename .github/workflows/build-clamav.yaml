@@ -8,9 +8,6 @@ on:
     paths:
       - clamav
 
-env:
-  IMAGE_NAME: maxtroughear/clamav
-
 jobs:
   build:
     runs-on: ubuntu-22.04
@@ -38,9 +35,6 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           endpoint: ${{ secrets.ARM_SSH_URL }}
           ssh_private_key: ${{ secrets.ARM_SSH_PRIVATE_KEY }}
-
-      - name: Available platforms
-        run: echo ${{ steps.buildx.outputs.platforms }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
