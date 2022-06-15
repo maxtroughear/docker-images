@@ -4,16 +4,16 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - "main"
+      - main
     paths:
-      - "clamav"
+      - clamav
 
 env:
   IMAGE_NAME: maxtroughear/clamav
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     permissions:
       contents: read
       packages: write
