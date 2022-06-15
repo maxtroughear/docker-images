@@ -17,11 +17,7 @@ services:
     image: ghcr.io/maxtroughear/mailcow-phpfpm:1.79
 
   sogo-mailcow:
-    build:
-      context: ./data/Dockerfiles/sogo
-      dockerfile: Dockerfile
-      args:
-        - SOGO_DEBIAN_REPOSITORY=http://packages.inverse.ca/SOGo/nightly/5/debian/
+    build: ./data/Dockerfiles/sogo
     image: ghcr.io/maxtroughear/mailcow-sogo:1.108
 
   dovecot-mailcow:
