@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM ubuntu:jammy
 LABEL maintainer "Andre Peters <andre.peters@servercow.de>"
 
 ARG DEBIAN_FRONTEND=noninteractive
@@ -31,7 +31,7 @@ RUN echo "Building from repository" \
   && touch /usr/share/doc/sogo/empty.sh \
   && apt-get update && apt-get install -y --no-install-recommends sogo sogo-activesync \
   && apt-get autoclean \
-  && rm -rf /var/lib/apt/lists/* /etc/apt/sources.list.d/sogo.list \
+  && rm -rf /var/lib/apt/lists/* \
   && touch /etc/default/locale
 
 COPY ./bootstrap-sogo.sh /bootstrap-sogo.sh
