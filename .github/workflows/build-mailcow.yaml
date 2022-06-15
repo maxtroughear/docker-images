@@ -60,10 +60,11 @@ jobs:
           docker compose pull --ignore-pull-failures --parallel
           docker buildx bake \
             --pull \
-            --set *.platform=linux/amd64,linux/arm64 \
-            --set *.cache-from=type=gha
-            --set *.cache-to=type=gha,mode=max
-            -f docker-compose.override.yml
+            --push \
+            --set=*.platform=linux/amd64,linux/arm64 \
+            --set=*.cache-from=type=gha \
+            --set=*.cache-to=type=gha,mode=max \
+            --file=docker-compose.override.yml
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
       version: ${{ steps.meta.outputs.version }}
