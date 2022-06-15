@@ -37,9 +37,6 @@ jobs:
         uses: docker/setup-buildx-action@v2
         with:
           install: true
-          config-inline: |
-            [worker.oci]
-              max-parallelism = 1
 
       - name: Available platforms
         run: echo ${{ steps.buildx.outputs.platforms }}
