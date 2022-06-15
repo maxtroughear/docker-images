@@ -1,0 +1,57 @@
+version: '2.1'
+services:
+  unbound-mailcow:
+    build: ./data/Dockerfiles/unbound
+    image: ghcr.io/maxtroughear/mailcow-unbound:1.16
+     
+  clamd-mailcow:
+    build: ./data/Dockerfiles/clamd
+    image: ghcr.io/maxtroughear/mailcow-clamd:1.52
+
+  rspamd-mailcow:
+    build: ./data/Dockerfiles/rspamd
+    image: ghcr.io/maxtroughear/mailcow-rspamd:1.90
+
+  php-fpm-mailcow:
+    build: ./data/Dockerfiles/phpfpm
+    image: ghcr.io/maxtroughear/mailcow-phpfpm:1.79
+
+  sogo-mailcow:
+    build:
+      context: ./data/Dockerfiles/sogo
+      dockerfile: Dockerfile
+      args:
+        - SOGO_DEBIAN_REPOSITORY=http://packages.inverse.ca/SOGo/nightly/5/debian/
+    image: ghcr.io/maxtroughear/mailcow-sogo:1.108
+
+  dovecot-mailcow:
+    build: ./data/Dockerfiles/dovecot
+    image: ghcr.io/maxtroughear/mailcow-dovecot:1.162
+
+  postfix-mailcow:
+    build: ./data/Dockerfiles/postfix
+    image: ghcr.io/maxtroughear/mailcow-postfix:1.67
+
+  acme-mailcow:
+    build: ./data/Dockerfiles/acme
+    image: ghcr.io/maxtroughear/mailcow-acme:1.82
+
+  netfilter-mailcow:
+    build: ./data/Dockerfiles/netfilter
+    image: ghcr.io/maxtroughear/mailcow-netfilter:1.48
+
+  watchdog-mailcow:
+    build: ./data/Dockerfiles/watchdog
+    image: ghcr.io/maxtroughear/mailcow-watchdog:1.97
+
+  dockerapi-mailcow:
+    build: ./data/Dockerfiles/dockerapi
+    image: ghcr.io/maxtroughear/mailcow-dockerapi:1.42
+
+  solr-mailcow:
+    build: ./data/Dockerfiles/solr
+    image: ghcr.io/maxtroughear/mailcow-solr:1.8.1
+
+  olefy-mailcow:
+    build: ./data/Dockerfiles/olefy
+    image: ghcr.io/maxtroughear/mailcow-olefy:1.10
