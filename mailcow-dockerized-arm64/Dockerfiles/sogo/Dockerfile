@@ -16,7 +16,7 @@ RUN touch .env \
 
 RUN ./build.sh
 
-FROM ubuntu:jammy
+FROM debian:bullseye-slim
 LABEL maintainer "Andre Peters <andre.peters@servercow.de>"
 
 ARG DEBIAN_FRONTEND=noninteractive
