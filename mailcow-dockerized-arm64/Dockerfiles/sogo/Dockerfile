@@ -1,3 +1,21 @@
+FROM debian:bullseye AS SOGO_BUILDER
+
+ENV DEBFULLNAME GitHubActions
+ENV DEBEMAIL githubactions@localhost
+ENV SOGO_VERSION 5.7.0
+
+WORKDIR /sogobuild
+
+COPY build.sh ./
+
+RUN touch .env \
+  && echo DEBFULLNAME="${DEBFULLNAME}" >> .env \
+  && echo DEBEMAIL="${DEBEMAIL}" >> .env \
+  && echo VERSION_TO_BUILD="${SOGO_VERSION}" >> .env \
+  && mkdir vendor
+
+RUN ./build.sh
+
 FROM ubuntu:jammy
 LABEL maintainer "Andre Peters <andre.peters@servercow.de>"
 
@@ -6,6 +24,8 @@ ENV LC_ALL C
 ENV GOSU_VERSION 1.14
 
 # Prerequisites
+COPY --from=SOGO_BUILDER /sogobuild/vendor/*.deb /sogodebs/
+
 RUN echo "Building from repository" \
   && apt-get update && apt-get install -y --no-install-recommends \
   apt-transport-https \
@@ -29,7 +49,8 @@ RUN echo "Building from repository" \
   && gosu nobody true \
   && mkdir /usr/share/doc/sogo \
   && touch /usr/share/doc/sogo/empty.sh \
-  && apt-get update && apt-get install -y --no-install-recommends sogo sogo-activesync \
+  && apt install /sogodebs/*.deb \
+  && rm /sogodebs/*.deb \
   && apt-get autoclean \
   && rm -rf /var/lib/apt/lists/* \
   && touch /etc/default/locale

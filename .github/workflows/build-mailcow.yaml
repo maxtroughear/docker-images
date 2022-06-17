@@ -28,7 +28,7 @@ jobs:
         run: cp ./mailcow-dockerized-arm64/docker-compose.override.yml ./mailcow-dockerized/docker-compose.override.yml
 
       - name: Copy mailcow-dockerized-arm64 Dockerfiles to mailcow-dockerized/data
-        run: rsync -a --include '*/'  --include 'Dockerfile' --exclude '*' ./mailcow-dockerized-arm64/Dockerfiles/ ./mailcow-dockerized/data/Dockerfiles/
+        run: rsync -a --include '*/' --exclude '*' ./mailcow-dockerized-arm64/Dockerfiles/ ./mailcow-dockerized/data/Dockerfiles/
 
       - name: Expose GitHub Runtime
         uses: crazy-max/ghaction-github-runtime@v2
