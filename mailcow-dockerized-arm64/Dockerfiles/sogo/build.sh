@@ -54,7 +54,7 @@ cd libwbxml
 mkdir build
 cd build
 
-cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..
+cmake -DCMAKE_INSTALL_PREFIX=/usr ..
 make
 make test
 make install
