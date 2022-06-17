@@ -65,7 +65,7 @@ cd "$PACKAGES_DIR"
 apt-get -f install -y
 
 # Install Python
-apt-get install -y python2
+apt-get install -y python
 
 # Checkout the SOPE repository with the given tag
 git clone --depth 1 --branch "${SOPE_GIT_TAG}" $REPOSITORY_SOPE
