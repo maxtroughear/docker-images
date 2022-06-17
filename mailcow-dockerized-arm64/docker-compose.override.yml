@@ -3,7 +3,7 @@ services:
   unbound-mailcow:
     build: ./data/Dockerfiles/unbound
     image: ghcr.io/maxtroughear/mailcow-unbound:1.16
-     
+
   clamd-mailcow:
     build: ./data/Dockerfiles/clamd
     image: ghcr.io/maxtroughear/mailcow-clamd:1.52

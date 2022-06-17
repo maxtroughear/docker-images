@@ -7,7 +7,7 @@ on:
       - main
     paths:
       - mailcow-dockerized
-      - mailcow-dockerized-arm64
+      - mailcow-dockerized-arm64/**
 
 env:
   COMPOSE_DOCKER_CLI_BUILD: 1
