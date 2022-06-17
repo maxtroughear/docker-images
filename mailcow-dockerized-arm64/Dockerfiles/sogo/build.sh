@@ -50,7 +50,7 @@ apt-get update && apt-get install -y $PACKAGES_TO_INSTALL
 apt-get -f install -y
 
 # Install Python
-apt-get install -y python
+apt-get install -y python2
 
 # Checkout the SOPE repository with the given tag
 git clone --depth 1 --branch "${SOPE_GIT_TAG}" $REPOSITORY_SOPE
