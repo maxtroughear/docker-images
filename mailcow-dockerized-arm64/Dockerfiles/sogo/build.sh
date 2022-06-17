@@ -59,6 +59,8 @@ make
 make test
 make install
 
+cd "$PACKAGES_DIR"
+
 # Install any missing packages
 apt-get -f install -y
 
