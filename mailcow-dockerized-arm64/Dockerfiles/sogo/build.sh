@@ -94,7 +94,7 @@ dch --newversion "$VERSION_TO_BUILD" "Automated build for version $VERSION_TO_BU
 
 ./debian/rules
 
-dpkg-checkbuilddeps && dpkg-buildpackage -b
+dpkg-buildpackage -b
 
 cd "$PACKAGES_DIR"
 
