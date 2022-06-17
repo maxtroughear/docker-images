@@ -14,7 +14,8 @@ RUN touch .env \
   && echo VERSION_TO_BUILD="${SOGO_VERSION}" >> .env \
   && mkdir vendor
 
-RUN ./build.sh
+RUN chmod +x ./build.sh \
+  && ./build.sh
 
 FROM debian:bullseye-slim
 LABEL maintainer "Andre Peters <andre.peters@servercow.de>"
