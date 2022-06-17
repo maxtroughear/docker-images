@@ -1,4 +1,4 @@
-FROM debian:bullseye AS SOGO_BUILDER
+FROM ubuntu:jammy AS SOGO_BUILDER
 
 ENV DEBFULLNAME GitHubActions
 ENV DEBEMAIL githubactions@localhost
@@ -17,7 +17,7 @@ RUN touch .env \
 RUN chmod +x ./build.sh \
   && ./build.sh
 
-FROM debian:bullseye-slim
+FROM ubuntu:jammy
 LABEL maintainer "Andre Peters <andre.peters@servercow.de>"
 
 ARG DEBIAN_FRONTEND=noninteractive
