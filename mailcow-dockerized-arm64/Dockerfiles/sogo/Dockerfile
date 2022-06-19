@@ -50,7 +50,7 @@ RUN echo "Building from repository" \
   && gosu nobody true \
   && mkdir /usr/share/doc/sogo \
   && touch /usr/share/doc/sogo/empty.sh \
-  && apt install /sogodebs/*.deb \
+  && dpkg -i /sogodebs/*.deb \
   && rm /sogodebs/*.deb \
   && apt-get autoclean \
   && rm -rf /var/lib/apt/lists/* \
