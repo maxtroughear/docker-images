@@ -54,8 +54,6 @@ wget -c http://ftp.debian.org/debian/pool/main/w/wbxml2/libwbxml2-1_0.11.8+dfsg-
 
 dpkg -i libwbxml2-1_0.11.8+dfsg-1_${ARCH}.deb libwbxml2-dev_0.11.8+dfsg-1_${ARCH}.deb
 
-cd "$PACKAGES_DIR"
-
 # Install any missing packages
 apt-get -f install -y
 
@@ -89,11 +87,11 @@ dch --newversion "$VERSION_TO_BUILD" "Automated build for version $VERSION_TO_BU
 
 ./debian/rules
 
-dpkg-buildpackage -b --no-check-builddeps
+dpkg-checkbuilddeps && dpkg-buildpackage -b
 
 cd "$PACKAGES_DIR"
 
 # Install the built packages
 dpkg -i sope4.9-gdl1-mysql_4.9.r1664_*.deb
 dpkg -i sope4.9-libxmlsaxdriver_4.9.r1664_*.deb
-dpkg -i "sogo_${VERSION_TO_BUILD}_*.deb"
+dpkg -i sogo_${VERSION_TO_BUILD}_*.deb
