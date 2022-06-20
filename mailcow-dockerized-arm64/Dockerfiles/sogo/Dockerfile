@@ -59,8 +59,8 @@ RUN echo "Building from repository" \
   && dpkg -i /sogodebs/libsope*.deb \
   && dpkg -i /sogodebs/sope*.deb \
   && dpkg -i /sogodebs/libsope*.deb \
-  && dpkg -i /sogodebs/sogo-activesync*.deb \
   && dpkg -i /sogodebs/sogo_*.deb \
+  && dpkg -i --ignore-depends /sogodebs/sogo-activesync*.deb \
   && apt-get autoclean \
   && rm -rf /var/lib/apt/lists/* \
   && touch /etc/default/locale
