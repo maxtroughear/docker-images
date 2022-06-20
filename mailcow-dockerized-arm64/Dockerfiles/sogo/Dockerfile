@@ -20,7 +20,7 @@ RUN echo "Building from repository" \
   syslog-ng-core \
   syslog-ng-mod-redis \
   dirmngr \
-  netcat \
+  netcat-openbsd \
   psmisc \
   wget \
   patch \
