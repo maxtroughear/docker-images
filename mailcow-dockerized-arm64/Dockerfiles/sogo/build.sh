@@ -95,3 +95,12 @@ cd "$PACKAGES_DIR"
 dpkg -i sope4.9-gdl1-mysql_4.9.r1664_*.deb
 dpkg -i sope4.9-libxmlsaxdriver_4.9.r1664_*.deb
 dpkg -i sogo_${VERSION_TO_BUILD}_*.deb
+
+# Copy required packages to output directory
+mkdir output
+cp libwbxml2-1_0.11.8+dfsg-1_${ARCH}.deb ./output
+cp libsope*4.9_*${ARCH}.dev ./output
+cp sope4.9-gdl1-mysql_4.9.r1664_${ARCH}.deb ./output
+cp sope4.9-libxmlsaxdriver_4.9.r1664_${ARCH}.deb ./output
+cp sogo_${VERSION_TO_BUILD}_${ARCH}.deb ./output
+cp sogo-activesync_${VERSION_TO_BUILD}_${ARCH}.deb ./output

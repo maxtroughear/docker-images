@@ -1,12 +1,32 @@
-FROM debian:sid-slim
+FROM debian:bullseye AS SOGO_BUILDER
+
+ENV DEBFULLNAME GitHubActions
+ENV DEBEMAIL githubactions@localhost
+ENV SOGO_VERSION 5.6.0
+
+WORKDIR /sogobuild
+
+COPY build.sh ./
+
+RUN touch .env \
+  && echo DEBFULLNAME="${DEBFULLNAME}" >> .env \
+  && echo DEBEMAIL="${DEBEMAIL}" >> .env \
+  && echo VERSION_TO_BUILD="${SOGO_VERSION}" >> .env \
+  && mkdir vendor
+
+RUN chmod +x ./build.sh \
+  && ./build.sh
+
+FROM debian:bullseye-slim
 LABEL maintainer "Andre Peters <andre.peters@servercow.de>"
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV LC_ALL C
 ENV GOSU_VERSION 1.14
-ENV SOGO_VERSION 5.7.0-1
 
 # Prerequisites
+COPY --from=SOGO_BUILDER /sogobuild/vendor/output/*.deb /sogodebs/
+
 RUN echo "Building from repository" \
   && apt-get update && apt-get install -y --no-install-recommends \
   apt-transport-https \
@@ -24,13 +44,23 @@ RUN echo "Building from repository" \
   psmisc \
   wget \
   patch \
+  gnustep-base-runtime \
+  libcrypt1 \
+  libcurl4 \
+  libsbjson2.3 \
+  libsodium23 \
   && dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
   && wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch" \
   && chmod +x /usr/local/bin/gosu \
   && gosu nobody true \
   && mkdir /usr/share/doc/sogo \
   && touch /usr/share/doc/sogo/empty.sh \
-  && apt-get install -y sogo=${SOGO_VERSION} sogo-activesync=${SOGO_VERSION} \
+  && dpkg -i /sogodebs/libwbxml*.deb \
+  && dpkg -i /sogodebs/libsope*.deb \
+  && dpkg -i /sogodebs/sope*.deb \
+  && dpkg -i /sogodebs/libsope*.deb \
+  && dpkg -i /sogodebs/sogo-activesync*.deb \
+  && dpkg -i /sogodebs/sogo_*.deb \
   && apt-get autoclean \
   && rm -rf /var/lib/apt/lists/* \
   && touch /etc/default/locale
