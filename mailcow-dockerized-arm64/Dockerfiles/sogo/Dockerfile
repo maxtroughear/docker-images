@@ -51,6 +51,7 @@ RUN echo "Building from repository" \
   libsodium23 \
   gnustep-make \
   libcurl4 \
+  lubcurl3-gnutls \
   liblasso3 \
   libmemcached11 \
   liboath0 \
