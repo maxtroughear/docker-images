@@ -49,6 +49,13 @@ RUN echo "Building from repository" \
   libcurl4 \
   libsbjson2.3 \
   libsodium23 \
+  gnustep-make \
+  libcurl4 \
+  liblasso3 \
+  libmemcached11 \
+  liboath0 \
+  libytnef0 \
+  libzip4 \
   && dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
   && wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch" \
   && chmod +x /usr/local/bin/gosu \
@@ -60,7 +67,7 @@ RUN echo "Building from repository" \
   && dpkg -i /sogodebs/sope*.deb \
   && dpkg -i /sogodebs/libsope*.deb \
   && dpkg -i /sogodebs/sogo_*.deb \
-  && dpkg --ignore-depends -i /sogodebs/sogo-activesync*.deb \
+  && dpkg --ignore-depends=libwbxml2-0 -i /sogodebs/sogo-activesync*.deb \
   && apt-get autoclean \
   && rm -rf /var/lib/apt/lists/* \
   && touch /etc/default/locale
