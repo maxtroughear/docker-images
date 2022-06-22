@@ -22,7 +22,7 @@ ENV LC_ALL C
 
 # Prerequisites
 COPY --from=BUILDER /build/vendor/output/*.deb /rspamddebs/
-COPY install-rundeps.sh.sh /install-rundeps.sh.sh
+COPY install-rundeps.sh /install-rundeps.sh
 
 RUN apt-get update && apt-get install -y \
   tzdata \
