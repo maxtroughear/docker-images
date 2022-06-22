@@ -34,7 +34,7 @@ RUN apt-get update && apt-get install -y \
   && apt-get update \
   && apt-get --no-install-recommends -y install redis-tools procps nano
 
-RUN apt install /rspamddebs/rspamd_*.deb \
+RUN apt install -y /rspamddebs/rspamd_*.deb \
   && rm /rspamddebs/*.deb \
   && apt-get autoremove --purge \
   && apt-get clean \

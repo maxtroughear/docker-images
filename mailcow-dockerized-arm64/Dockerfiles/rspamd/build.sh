@@ -50,7 +50,7 @@ echo "deb-src https://rspamd.com/apt-stable/ ${DISTRIBUTION} main" > /etc/apt/so
 
 apt-get update
 apt-get source rspamd=${VERSION_TO_BUILD}-1~${DISTRIBUTION}
-apt build-dep rspamd=${VERSION_TO_BUILD}-1~${DISTRIBUTION}
+apt build-dep -y rspamd=${VERSION_TO_BUILD}-1~${DISTRIBUTION}
 
 cd rspamd-${VERSION_TO_BUILD}
 
