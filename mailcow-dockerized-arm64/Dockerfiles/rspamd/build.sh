@@ -26,12 +26,8 @@ if [ -z ${CI+x} ]; then
   set +a
 fi
 
-
-ARCH="$(dpkg --print-architecture)"
-DISTRIBUTION="$(lsb_release -sc)"
-
 PACKAGES_DIR="${BASE_DIR}/vendor"
-PACKAGES_TO_INSTALL="tzdata ca-certificates gnupg2 apt-transport-https git zip wget devscripts make cmake debhelper libcurl4-openssl-dev libglib2.0-dev libicu-dev libjemalloc-dev libluajit-5.1-dev libmagic-dev libpcre2-dev libsodium-dev libsqlite3-dev libssl-dev libunwind-dev perl ragel zlib1g-dev"
+PACKAGES_TO_INSTALL="tzdata ca-certificates gnupg2 apt-transport-https lsb-release git zip wget devscripts make cmake debhelper libcurl4-openssl-dev libglib2.0-dev libicu-dev libjemalloc-dev libluajit-5.1-dev libmagic-dev libpcre2-dev libsodium-dev libsqlite3-dev libssl-dev libunwind-dev perl ragel zlib1g-dev"
 
 export DEBIAN_FRONTEND=noninteractive
 
@@ -46,6 +42,9 @@ apt-get update && apt-get install -y $PACKAGES_TO_INSTALL
 
 # Install any missing packages
 apt-get -f install -y
+
+ARCH="$(dpkg --print-architecture)"
+DISTRIBUTION="$(lsb_release -sc)"
 
 if [ "$ARCH" = "amd64" ]; then
   apt-get install -y libhyperscan-dev
