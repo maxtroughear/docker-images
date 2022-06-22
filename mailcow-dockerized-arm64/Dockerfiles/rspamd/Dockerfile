@@ -32,12 +32,9 @@ RUN apt-get update && apt-get install -y \
   dnsutils \
   netcat \
   && apt-get update \
-  && apt-get --no-install-recommends -y install redis-tools procps nano libglib2.0-0 libsodium23 libunwind8
+  && apt-get --no-install-recommends -y install redis-tools procps nano
 
-RUN chmod +x ./install-rundeps.sh.sh \
-  && ./install-rundeps.sh.sh
-
-RUN dpkg -i /rspamddebs/rspamd_*.deb \
+RUN apt install /rspamddebs/rspamd_*.deb \
   && rm /rspamddebs/*.deb \
   && apt-get autoremove --purge \
   && apt-get clean \
