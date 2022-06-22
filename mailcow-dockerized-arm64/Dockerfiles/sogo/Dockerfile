@@ -1,4 +1,4 @@
-FROM debian:bullseye AS SOGO_BUILDER
+FROM debian:bullseye AS BUILDER
 
 ENV DEBFULLNAME GitHubActions
 ENV DEBEMAIL githubactions@localhost
@@ -25,7 +25,7 @@ ENV LC_ALL C
 ENV GOSU_VERSION 1.14
 
 # Prerequisites
-COPY --from=SOGO_BUILDER /sogobuild/vendor/output/*.deb /sogodebs/
+COPY --from=BUILDER /sogobuild/vendor/output/*.deb /sogodebs/
 
 RUN echo "Building from repository" \
   && apt-get update && apt-get install -y --no-install-recommends \
@@ -69,6 +69,7 @@ RUN echo "Building from repository" \
   && dpkg -i /sogodebs/libsope*.deb \
   && dpkg -i /sogodebs/sogo_*.deb \
   && dpkg --ignore-depends=libwbxml2-0 -i /sogodebs/sogo-activesync*.deb \
+  && rm /sogodebs/*.deb \
   && apt-get autoclean \
   && rm -rf /var/lib/apt/lists/* \
   && touch /etc/default/locale
