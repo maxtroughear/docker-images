@@ -62,5 +62,4 @@ debuild -b -uc -us
 cd "$PACKAGES_DIR"
 
 mkdir output
-
-cp rspamd_${VERSION_TO_BUILD}-1~${DISTRIBUTION}_${ARCH}.deb
+cp rspamd_${VERSION_TO_BUILD}-1~${DISTRIBUTION}_${ARCH}.deb ./output
