@@ -22,6 +22,7 @@ ENV LC_ALL C
 
 # Prerequisites
 COPY --from=BUILDER /build/vendor/output/*.deb /rspamddebs/
+COPY install-hyperscan.sh /install-hyperscan.sh
 
 RUN apt-get update && apt-get install -y \
   tzdata \
@@ -31,8 +32,12 @@ RUN apt-get update && apt-get install -y \
   dnsutils \
   netcat \
   && apt-get update \
-  && apt-get --no-install-recommends -y install redis-tools procps nano \
-  && dpkg -i /rspamddebs/rspamd_*.deb \
+  && apt-get --no-install-recommends -y install redis-tools procps nano libluajit-5.1-2 libglib2.0-0 libsodium23 libunwind8
+
+RUN chmod +x ./install-hyperscan.sh \
+  && ./install-hyperscan.sh
+
+RUN dpkg -i /rspamddebs/rspamd_*.deb \
   && rm /rspamddebs/*.deb \
   && apt-get autoremove --purge \
   && apt-get clean \
