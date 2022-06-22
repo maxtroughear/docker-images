@@ -28,6 +28,7 @@ fi
 
 
 ARCH="$(dpkg --print-architecture)"
+DISTRIBUTION="$(lsb_release -sc)"
 
 PACKAGES_DIR="${BASE_DIR}/vendor"
 PACKAGES_TO_INSTALL="tzdata ca-certificates gnupg2 apt-transport-https git zip wget devscripts make cmake debhelper libcurl4-openssl-dev libglib2.0-dev libicu-dev libjemalloc-dev libluajit-5.1-dev libmagic-dev libpcre2-dev libsodium-dev libsqlite3-dev libssl-dev libunwind-dev perl ragel zlib1g-dev"
