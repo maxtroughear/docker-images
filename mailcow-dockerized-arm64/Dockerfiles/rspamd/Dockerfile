@@ -1,5 +1,7 @@
 FROM debian:bullseye AS BUILDER
 
+ENV RSPAMD_VERSION 3.2
+
 WORKDIR /build
 
 COPY build.sh ./
