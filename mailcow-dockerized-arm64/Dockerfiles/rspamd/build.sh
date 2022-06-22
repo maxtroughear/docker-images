@@ -27,7 +27,7 @@ if [ -z ${CI+x} ]; then
 fi
 
 PACKAGES_DIR="${BASE_DIR}/vendor"
-PACKAGES_TO_INSTALL="tzdata ca-certificates gnupg2 apt-transport-https lsb-release git zip wget devscripts make cmake debhelper libcurl4-openssl-dev libglib2.0-dev libicu-dev libjemalloc-dev libluajit-5.1-dev libmagic-dev libpcre2-dev libsodium-dev libsqlite3-dev libssl-dev libunwind-dev perl ragel zlib1g-dev"
+BUILD_PACKAGES_TO_INSTALL="make cmake debhelper libcurl4-openssl-dev libglib2.0-dev libicu-dev libjemalloc-dev libmagic-dev libpcre2-dev libsodium-dev libsqlite3-dev libssl-dev libunwind-dev perl ragel zlib1g-dev"
 
 export DEBIAN_FRONTEND=noninteractive
 
@@ -37,8 +37,11 @@ cd "$PACKAGES_DIR"
 echo 'APT::Get::Install-Recommends "false";' >> /etc/apt/apt.conf
 echo 'APT::Get::Install-Suggests "false";' >> /etc/apt/apt.conf
 
+# Install common packages
+apt-get update && apt-get install -y tzdata ca-certificates gnupg2 apt-transport-https lsb-release git zip wget devscripts
+
 # Install required packages
-apt-get update && apt-get install -y $PACKAGES_TO_INSTALL
+apt-get update && apt-get install -y $BUILD_PACKAGES_TO_INSTALL
 
 # Install any missing packages
 apt-get -f install -y
@@ -47,7 +50,9 @@ ARCH="$(dpkg --print-architecture)"
 DISTRIBUTION="$(lsb_release -sc)"
 
 if [ "$ARCH" = "amd64" ]; then
-  apt-get install -y libhyperscan-dev
+  apt-get install -y libhyperscan-dev libluajit-5.1-dev
+else
+  apt-get install -y libhyperscan-dev liblua5.1-0-dev
 fi
 
 apt-key adv --fetch-keys https://rspamd.com/apt-stable/gpg.key
