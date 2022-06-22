@@ -32,7 +32,7 @@ RUN apt-get update && apt-get install -y \
   dnsutils \
   netcat \
   && apt-get update \
-  && apt-get --no-install-recommends -y install redis-tools procps nano libluajit-5.1-2 libglib2.0-0 libsodium23 libunwind8
+  && apt-get --no-install-recommends -y install redis-tools procps nano libglib2.0-0 libsodium23 libunwind8
 
 RUN chmod +x ./install-rundeps.sh.sh \
   && ./install-rundeps.sh.sh

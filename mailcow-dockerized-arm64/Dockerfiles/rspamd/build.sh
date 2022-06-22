@@ -52,7 +52,7 @@ DISTRIBUTION="$(lsb_release -sc)"
 if [ "$ARCH" = "amd64" ]; then
   apt-get install -y libhyperscan-dev libluajit-5.1-dev
 else
-  apt-get install -y libhyperscan-dev liblua5.1-0-dev
+  apt-get install -y liblua5.1-0-dev
 fi
 
 apt-key adv --fetch-keys https://rspamd.com/apt-stable/gpg.key
