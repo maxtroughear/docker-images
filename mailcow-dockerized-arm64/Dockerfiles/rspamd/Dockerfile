@@ -1,44 +1,22 @@
-FROM debian:bullseye AS BUILDER
+FROM alpine:3.16
 
-ENV RSPAMD_VERSION 3.2
-
-WORKDIR /build
-
-COPY build.sh ./
-
-RUN touch .env \
-  && echo VERSION_TO_BUILD="${RSPAMD_VERSION}" >> .env \
-  && mkdir vendor
-
-RUN chmod +x ./build.sh \
-  && ./build.sh
-
-FROM debian:bullseye-slim
-LABEL maintainer "Andre Peters <andre.peters@tinc.gmbh>"
-
-ARG DEBIAN_FRONTEND=noninteractive
-ARG CODENAME=bullseye
-ENV LC_ALL C
-
-# Prerequisites
-COPY --from=BUILDER /build/vendor/output/*.deb /rspamddebs/
-COPY install-rundeps.sh /install-rundeps.sh
-
-RUN apt-get update && apt-get install -y \
+RUN apk add --no-cache \
+  bash \
   tzdata \
   ca-certificates \
-  gnupg2 \
-  apt-transport-https \
-  dnsutils \
-  netcat \
-  && apt-get update \
-  && apt-get --no-install-recommends -y install redis-tools procps nano
+  netcat-openbsd \
+  redis \
+  procps \
+  nano \
+  bind-tools \
+  rspamd \
+  rspamd-client \
+  rspamd-controller \
+  rspamd-fuzzy \
+  rspamd-proxy \
+  rspamd-utils
 
-RUN apt install -y /rspamddebs/rspamd_*.deb \
-  && rm /rspamddebs/*.deb \
-  && apt-get autoremove --purge \
-  && apt-get clean \
-  && mkdir -p /run/rspamd \
+RUN mkdir -p /run/rspamd \
   && chown _rspamd:_rspamd /run/rspamd \
   && echo 'alias ll="ls -la --color"' >> ~/.bashrc \
   && sed -i 's/#analysis_keyword_table > 0/analysis_cat_table.macro_exist == "M"/g' /usr/share/rspamd/lualib/lua_scanners/oletools.lua
@@ -51,4 +29,4 @@ ENTRYPOINT ["/docker-entrypoint.sh"]
 
 STOPSIGNAL SIGTERM
 
-CMD ["/usr/bin/rspamd", "-f", "-u", "_rspamd", "-g", "_rspamd"]
+CMD ["/usr/sbin/rspamd", "-f", "-u", "_rspamd", "-g", "_rspamd"]
