@@ -16,15 +16,16 @@ RUN apk add --no-cache \
   rspamd-proxy \
   rspamd-utils
 
-RUN adduser \
-  --quiet \
+RUN addgroup \
   --system \
-  --group \
+  _rspamd \
+  && adduser \
+  --system \
   --home /var/lib/rspamd \
   --no-create-home \
-  --disabled-login \
+  --disabled-password \
   --gecos "rspamd spam filtering system" \
-  --force-badname \
+  _rspamd \
   _rspamd \
   && mkdir -p /var/lib/rspamd /var/log/rspamd || true \
   && chown _rspamd: /var/lib/rspamd /var/log/rspamd
