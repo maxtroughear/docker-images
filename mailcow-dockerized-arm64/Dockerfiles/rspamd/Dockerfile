@@ -39,6 +39,8 @@ COPY settings.conf /etc/rspamd/settings.conf
 COPY metadata_exporter.lua /usr/share/rspamd/plugins/metadata_exporter.lua
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
+RUN chmod +x /docker-entrypoint.sh
+
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 STOPSIGNAL SIGTERM
