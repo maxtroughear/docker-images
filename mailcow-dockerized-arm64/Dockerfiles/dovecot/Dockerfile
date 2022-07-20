@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 LABEL maintainer "Andre Peters <andre.peters@servercow.de>"
 
 ARG DEBIAN_FRONTEND=noninteractive
@@ -89,13 +89,13 @@ RUN groupadd -g 5000 vmail \
   && gosu nobody true \
   && apt-get update \
   && apt-get -y --no-install-recommends install \
+  dovecot-core \
   dovecot-auth-lua \
   dovecot-managesieved \
   dovecot-sieve \
   dovecot-lmtpd \
   dovecot-ldap \
   dovecot-mysql \
-  dovecot-core \
   dovecot-pop3d \
   dovecot-imapd \
   dovecot-solr \

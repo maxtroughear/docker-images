@@ -2,7 +2,7 @@ FROM debian:bullseye AS BUILDER
 
 ENV DEBFULLNAME GitHubActions
 ENV DEBEMAIL githubactions@localhost
-ENV SOGO_VERSION 5.6.0
+ENV SOGO_VERSION 5.7.0
 
 WORKDIR /sogobuild
 
