@@ -22,7 +22,7 @@ jobs:
           submodules: recursive
 
       - name: Copy clamav-arm64 Dockerfile to clamav
-        run: rsync cp ./clamav-arm64/Dockerfile ./clamav/Dockerfile
+        run: cp ./clamav-arm64/Dockerfile ./clamav/Dockerfile
 
       - name: Expose GitHub Runtime
         uses: crazy-max/ghaction-github-runtime@v2
