@@ -60,8 +60,6 @@ jobs:
           docker buildx bake \
             --push \
             --set=*.platform=linux/amd64,linux/arm64 \
-            --set=*.cache-from=type=gha \
-            --set=*.cache-to=type=gha,mode=max \
             --file=docker-compose.override.yml
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
