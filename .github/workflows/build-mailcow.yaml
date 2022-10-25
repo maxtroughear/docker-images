@@ -28,7 +28,7 @@ jobs:
         run: cp ./mailcow-dockerized-arm64/docker-compose.override.yml ./mailcow-dockerized/docker-compose.override.yml
 
       - name: Copy mailcow-dockerized-arm64 Dockerfiles to mailcow-dockerized/data
-        run: rsync -va --include '*/' ./mailcow-dockerized-arm64/Dockerfiles/ ./mailcow-dockerized/data/Dockerfiles/
+        run: rsync -vaI --include '*/' ./mailcow-dockerized-arm64/Dockerfiles/ ./mailcow-dockerized/data/Dockerfiles/
 
       - name: Expose GitHub Runtime
         uses: crazy-max/ghaction-github-runtime@v2
@@ -62,6 +62,8 @@ jobs:
             --pull \
             --push \
             --set=*.platform=linux/amd64,linux/arm64 \
+            --set=*.cache-from=type=gha \
+            --set=*.cache-to=type=gha,mode=max \
             --file=docker-compose.override.yml
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
