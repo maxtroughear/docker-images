@@ -56,10 +56,12 @@ jobs:
       - name: Docker Compose build and push
         run: |
           cd ./mailcow-dockerized
-          echo 'Europe/Berlin' | MAILCOW_HOSTNAME=build.mailcow ./generate_config.sh
           docker buildx bake \
+            --pull \
             --push \
             --set=*.platform=linux/amd64,linux/arm64 \
+            --set=*.cache-from=type=gha \
+            --set=*.cache-to=type=gha,mode=max \
             --file=docker-compose.override.yml
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
