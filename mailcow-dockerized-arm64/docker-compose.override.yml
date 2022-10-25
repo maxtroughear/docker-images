@@ -18,11 +18,11 @@ services:
 
   sogo-mailcow:
     build: ./data/Dockerfiles/sogo
-    image: ghcr.io/maxtroughear/mailcow-sogo:1.110
+    image: ghcr.io/maxtroughear/mailcow-sogo:1.111
 
   dovecot-mailcow:
     build: ./data/Dockerfiles/dovecot
-    image: ghcr.io/maxtroughear/mailcow-dovecot:1.18
+    image: ghcr.io/maxtroughear/mailcow-dovecot:1.19
 
   postfix-mailcow:
     build: ./data/Dockerfiles/postfix
