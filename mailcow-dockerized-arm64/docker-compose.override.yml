@@ -6,7 +6,7 @@ services:
 
   clamd-mailcow:
     build: ./data/Dockerfiles/clamd
-    image: ghcr.io/maxtroughear/mailcow-clamd:1.53
+    image: ghcr.io/maxtroughear/mailcow-clamd:1.54
 
   rspamd-mailcow:
     build: ./data/Dockerfiles/rspamd
