@@ -22,11 +22,11 @@ services:
 
   dovecot-mailcow:
     build: ./data/Dockerfiles/dovecot
-    image: ghcr.io/maxtroughear/mailcow-dovecot:1.19
+    image: ghcr.io/maxtroughear/mailcow-dovecot:1.20
 
   postfix-mailcow:
     build: ./data/Dockerfiles/postfix
-    image: ghcr.io/maxtroughear/mailcow-postfix:1.67
+    image: ghcr.io/maxtroughear/mailcow-postfix:1.68
 
   acme-mailcow:
     build: ./data/Dockerfiles/acme
