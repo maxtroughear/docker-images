@@ -26,8 +26,8 @@ if [ -z ${CI+x} ]; then
     set +a
 fi
 
-REPOSITORY_SOGO="https://github.com/inverse-inc/sogo.git"
-REPOSITORY_SOPE="https://github.com/inverse-inc/sope.git"
+REPOSITORY_SOGO="https://github.com/Alinto/sogo.git"
+REPOSITORY_SOPE="https://github.com/Alinto/sope.git"
 SOGO_GIT_TAG="SOGo-${VERSION_TO_BUILD}"
 SOPE_GIT_TAG="SOPE-${VERSION_TO_BUILD}"
 
