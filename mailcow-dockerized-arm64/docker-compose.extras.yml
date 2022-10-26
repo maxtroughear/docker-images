@@ -1,0 +1,5 @@
+version: '2.1'
+services:
+  backup-mailcow:
+    build: ./data/Dockerfiles/backup
+    image: ghcr.io/maxtroughear/mailcow-backup:1.0

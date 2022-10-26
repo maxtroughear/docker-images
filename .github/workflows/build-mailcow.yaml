@@ -27,6 +27,9 @@ jobs:
       - name: Copy mailcow-dockerized-arm64 docker-compose.override.yml to mailcow-dockerized
         run: cp ./mailcow-dockerized-arm64/docker-compose.override.yml ./mailcow-dockerized/docker-compose.override.yml
 
+      - name: Copy mailcow-dockerized-arm64 docker-compose.extras.yml to mailcow-dockerized
+        run: cp ./mailcow-dockerized-arm64/docker-compose.extras.yml ./mailcow-dockerized/docker-compose.extras.yml
+
       - name: Copy mailcow-dockerized-arm64 Dockerfiles to mailcow-dockerized/data
         run: rsync -vaI --include '*/' ./mailcow-dockerized-arm64/Dockerfiles/ ./mailcow-dockerized/data/Dockerfiles/
 
@@ -53,7 +56,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Docker Compose build and push
+      - name: Docker Compose build and push services
         run: |
           cd ./mailcow-dockerized
           docker buildx bake \
@@ -63,6 +66,17 @@ jobs:
             --set=*.cache-from=type=gha \
             --set=*.cache-to=type=gha,mode=max \
             --file=docker-compose.override.yml
+
+      - name: Docker Compose build and push extras
+        run: |
+          cd ./mailcow-dockerized
+          docker buildx bake \
+            --pull \
+            --push \
+            --set=*.platform=linux/amd64,linux/arm64 \
+            --set=*.cache-from=type=gha \
+            --set=*.cache-to=type=gha,mode=max \
+            --file=docker-compose.extras.yml
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
       version: ${{ steps.meta.outputs.version }}
