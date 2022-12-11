@@ -52,7 +52,7 @@ apt-get update && apt-get install -y $PACKAGES_TO_INSTALL
 wget -c http://ftp.debian.org/debian/pool/main/w/wbxml2/libwbxml2-dev_0.11.8+dfsg-3_${ARCH}.deb
 wget -c http://ftp.debian.org/debian/pool/main/w/wbxml2/libwbxml2-1_0.11.8+dfsg-3_${ARCH}.deb
 
-dpkg -i libwbxml2-1_0.11.8+dfsg-1_${ARCH}.deb libwbxml2-dev_0.11.8+dfsg-1_${ARCH}.deb
+dpkg -i libwbxml2-1_0.11.8+dfsg-3_${ARCH}.deb libwbxml2-dev_0.11.8+dfsg-3_${ARCH}.deb
 
 # Install any missing packages
 apt-get -f install -y
@@ -98,7 +98,7 @@ dpkg -i sogo_${VERSION_TO_BUILD}_*.deb
 
 # Copy required packages to output directory
 mkdir output
-cp libwbxml2-1_0.11.8+dfsg-1_${ARCH}.deb ./output
+cp libwbxml2-1_0.11.8+dfsg-3_${ARCH}.deb ./output
 cp libsope*4.9_*${ARCH}.deb ./output
 cp sope4.9-gdl1-mysql_4.9.r1664_${ARCH}.deb ./output
 cp sope4.9-libxmlsaxdriver_4.9.r1664_${ARCH}.deb ./output
