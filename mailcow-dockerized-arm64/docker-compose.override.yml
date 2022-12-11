@@ -10,15 +10,15 @@ services:
 
   rspamd-mailcow:
     build: ./data/Dockerfiles/rspamd
-    image: ghcr.io/maxtroughear/mailcow-rspamd:1.90
+    image: ghcr.io/maxtroughear/mailcow-rspamd:1.91
 
   php-fpm-mailcow:
     build: ./data/Dockerfiles/phpfpm
-    image: ghcr.io/maxtroughear/mailcow-phpfpm:1.79
+    image: ghcr.io/maxtroughear/mailcow-phpfpm:1.80
 
   sogo-mailcow:
     build: ./data/Dockerfiles/sogo
-    image: ghcr.io/maxtroughear/mailcow-sogo:1.111
+    image: ghcr.io/maxtroughear/mailcow-sogo:1.112
 
   dovecot-mailcow:
     build: ./data/Dockerfiles/dovecot
@@ -34,7 +34,7 @@ services:
 
   netfilter-mailcow:
     build: ./data/Dockerfiles/netfilter
-    image: ghcr.io/maxtroughear/mailcow-netfilter:1.48
+    image: ghcr.io/maxtroughear/mailcow-netfilter:1.49
 
   watchdog-mailcow:
     build: ./data/Dockerfiles/watchdog
