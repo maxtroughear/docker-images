@@ -49,8 +49,8 @@ echo 'APT::Get::Install-Suggests "false";' >> /etc/apt/apt.conf
 apt-get update && apt-get install -y $PACKAGES_TO_INSTALL
 
 # Install libwbxml from debian unstable
-wget -c http://ftp.debian.org/debian/pool/main/w/wbxml2/libwbxml2-dev_0.11.8+dfsg-1_${ARCH}.deb
-wget -c http://ftp.debian.org/debian/pool/main/w/wbxml2/libwbxml2-1_0.11.8+dfsg-1_${ARCH}.deb
+wget -c http://ftp.debian.org/debian/pool/main/w/wbxml2/libwbxml2-dev_0.11.8+dfsg-3_${ARCH}.deb
+wget -c http://ftp.debian.org/debian/pool/main/w/wbxml2/libwbxml2-1_0.11.8+dfsg-3_${ARCH}.deb
 
 dpkg -i libwbxml2-1_0.11.8+dfsg-1_${ARCH}.deb libwbxml2-dev_0.11.8+dfsg-1_${ARCH}.deb
 
