@@ -24,6 +24,9 @@ jobs:
       - name: Copy clamav-arm64 Dockerfile to clamav
         run: cp ./clamav-arm64/Dockerfile ./clamav/Dockerfile
 
+      - name: Copy clamav-docker scripts to clamav
+        run: cp -r ./clamav-docker/clamav/1.0/alpine/scripts ./clamav/scripts
+
       - name: Expose GitHub Runtime
         uses: crazy-max/ghaction-github-runtime@v2
 
@@ -53,7 +56,7 @@ jobs:
         with:
           images: ghcr.io/maxtroughear/clamav
           tags: |
-            type=raw,suffix=_base,value=0.105.1
+            type=raw,suffix=_base,value=1.0.1-1
 
       - name: Build and push
         uses: docker/build-push-action@v3

@@ -4,3 +4,6 @@
 [submodule "mailcow-dockerized"]
 	path = mailcow-dockerized
 	url = git@github.com:mailcow/mailcow-dockerized.git
+[submodule "clamav-docker"]
+	path = clamav-docker
+	url = git@github.com:Cisco-Talos/clamav-docker.git
