@@ -4,6 +4,7 @@ LABEL maintainer "Andre Peters <andre.peters@servercow.de>"
 ARG DEBIAN_FRONTEND=noninteractive
 # renovate: datasource=github-tags depName=dovecot/core versioning=semver-coerced
 ARG DOVECOT=2.3.20
+ARG PIGEONHOLE=0.5.20
 ARG DOVECOT_MAJORMINOR=2.3
 # renovate: datasource=github-releases depName=tianon/gosu versioning=semver-coerced
 ARG GOSU_VERSION=1.16
@@ -100,6 +101,14 @@ RUN groupadd -g 5000 vmail \
   && ./configure \
   && make \
   && make install \
+  && cd .. \
+  && wget https://pigeonhole.dovecot.org/releases/${DOVECOT_MAJORMINOR}/dovecot-${DOVECOT_MAJORMINOR}-pigeonhole-${PIGEONHOLE}.tar.gz \
+  && tar -xf dovecot-${DOVECOT_MAJORMINOR}-pigeonhole-${PIGEONHOLE}.tar.gz \
+  && cd dovecot-${DOVECOT_MAJORMINOR}-pigeonhole-${PIGEONHOLE} \
+  && ./configure \
+  && make \
+  && make install \
+  && cd .. \
   && pip3 install mysql-connector-python html2text jinja2 redis \
   && apt-get autoremove --purge -y \
   && apt-get autoclean \
