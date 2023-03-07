@@ -21,8 +21,9 @@ FROM debian:bullseye-slim
 LABEL maintainer "Andre Peters <andre.peters@servercow.de>"
 
 ARG DEBIAN_FRONTEND=noninteractive
+# renovate: datasource=github-releases depName=tianon/gosu versioning=semver-coerced
+ARG GOSU_VERSION=1.16
 ENV LC_ALL C
-ENV GOSU_VERSION 1.14
 
 # Prerequisites
 COPY --from=BUILDER /sogobuild/vendor/output/*.deb /sogodebs/

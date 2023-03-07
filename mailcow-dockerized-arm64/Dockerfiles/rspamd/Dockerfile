@@ -37,6 +37,7 @@ RUN mkdir -p /run/rspamd \
 
 COPY settings.conf /etc/rspamd/settings.conf
 COPY metadata_exporter.lua /usr/share/rspamd/plugins/metadata_exporter.lua
+COPY set_worker_password.sh /set_worker_password.sh
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 RUN chmod +x /docker-entrypoint.sh

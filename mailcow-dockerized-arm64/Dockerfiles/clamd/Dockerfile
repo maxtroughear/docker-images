@@ -1,4 +1,4 @@
-FROM ghcr.io/maxtroughear/clamav:0.105.1_base
+FROM ghcr.io/maxtroughear/clamav:1.0.1-1_base
 
 LABEL maintainer "André Peters <andre.peters@servercow.de>"
 

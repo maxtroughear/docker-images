@@ -28,8 +28,8 @@ fi
 
 REPOSITORY_SOGO="https://github.com/Alinto/sogo.git"
 REPOSITORY_SOPE="https://github.com/Alinto/sope.git"
-SOGO_GIT_TAG="SOGo-${VERSION_TO_BUILD}"
-SOPE_GIT_TAG="SOPE-${VERSION_TO_BUILD}"
+SOGO_GIT_TAG="master"
+SOPE_GIT_TAG="master"
 
 ARCH="$(dpkg --print-architecture)"
 
@@ -91,16 +91,16 @@ dpkg-checkbuilddeps && dpkg-buildpackage -b
 
 cd "$PACKAGES_DIR"
 
-# Install the built packages
-dpkg -i sope4.9-gdl1-mysql_4.9.r1664_*.deb
-dpkg -i sope4.9-libxmlsaxdriver_4.9.r1664_*.deb
-dpkg -i sogo_${VERSION_TO_BUILD}_*.deb
-
 # Copy required packages to output directory
 mkdir output
-cp libwbxml2-1_0.11.8+dfsg-3_${ARCH}.deb ./output
-cp libsope*4.9_*${ARCH}.deb ./output
-cp sope4.9-gdl1-mysql_4.9.r1664_${ARCH}.deb ./output
-cp sope4.9-libxmlsaxdriver_4.9.r1664_${ARCH}.deb ./output
-cp sogo_${VERSION_TO_BUILD}_${ARCH}.deb ./output
-cp sogo-activesync_${VERSION_TO_BUILD}_${ARCH}.deb ./output
+
+cp libwbxml2*.deb ./output
+cp libsope*.deb ./output
+cp sope*gdl1-mysql*.deb ./output
+cp sope*libxmlsaxdriver*.deb ./output
+cp sogo*.deb ./output
+
+# Remove dev packages
+cd output
+rm ./*dev*.deb
+rm ./*dbg*.deb

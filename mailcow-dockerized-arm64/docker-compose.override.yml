@@ -2,27 +2,27 @@ version: '2.1'
 services:
   unbound-mailcow:
     build: ./data/Dockerfiles/unbound
-    image: ghcr.io/maxtroughear/mailcow-unbound:1.16
+    image: ghcr.io/maxtroughear/mailcow-unbound:1.17
 
   clamd-mailcow:
     build: ./data/Dockerfiles/clamd
-    image: ghcr.io/maxtroughear/mailcow-clamd:1.54
+    image: ghcr.io/maxtroughear/mailcow-clamd:1.61
 
   rspamd-mailcow:
     build: ./data/Dockerfiles/rspamd
-    image: ghcr.io/maxtroughear/mailcow-rspamd:1.91
+    image: ghcr.io/maxtroughear/mailcow-rspamd:1.92
 
   php-fpm-mailcow:
     build: ./data/Dockerfiles/phpfpm
-    image: ghcr.io/maxtroughear/mailcow-phpfpm:1.80
+    image: ghcr.io/maxtroughear/mailcow-phpfpm:1.82
 
   sogo-mailcow:
     build: ./data/Dockerfiles/sogo
-    image: ghcr.io/maxtroughear/mailcow-sogo:1.112
+    image: ghcr.io/maxtroughear/mailcow-sogo:1.115
 
   dovecot-mailcow:
     build: ./data/Dockerfiles/dovecot
-    image: ghcr.io/maxtroughear/mailcow-dovecot:1.20
+    image: ghcr.io/maxtroughear/mailcow-dovecot:1.23
 
   postfix-mailcow:
     build: ./data/Dockerfiles/postfix
@@ -30,11 +30,11 @@ services:
 
   acme-mailcow:
     build: ./data/Dockerfiles/acme
-    image: ghcr.io/maxtroughear/mailcow-acme:1.82
+    image: ghcr.io/maxtroughear/mailcow-acme:1.84
 
   netfilter-mailcow:
     build: ./data/Dockerfiles/netfilter
-    image: ghcr.io/maxtroughear/mailcow-netfilter:1.49
+    image: ghcr.io/maxtroughear/mailcow-netfilter:1.51
 
   watchdog-mailcow:
     build: ./data/Dockerfiles/watchdog
@@ -42,7 +42,7 @@ services:
 
   dockerapi-mailcow:
     build: ./data/Dockerfiles/dockerapi
-    image: ghcr.io/maxtroughear/mailcow-dockerapi:1.42
+    image: ghcr.io/maxtroughear/mailcow-dockerapi:2.0.1
 
   solr-mailcow:
     build: ./data/Dockerfiles/solr
@@ -50,4 +50,4 @@ services:
 
   olefy-mailcow:
     build: ./data/Dockerfiles/olefy
-    image: ghcr.io/maxtroughear/mailcow-olefy:1.10
+    image: ghcr.io/maxtroughear/mailcow-olefy:1.11

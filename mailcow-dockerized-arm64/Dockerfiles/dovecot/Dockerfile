@@ -1,9 +1,14 @@
-FROM debian:bookworm-slim
+FROM debian:bullseye-slim
 LABEL maintainer "Andre Peters <andre.peters@servercow.de>"
 
 ARG DEBIAN_FRONTEND=noninteractive
+# renovate: datasource=github-tags depName=dovecot/core versioning=semver-coerced
+ARG DOVECOT=2.3.20
+ARG DOVECOT_MAJORMINOR=2.3
+# renovate: datasource=github-releases depName=tianon/gosu versioning=semver-coerced
+ARG GOSU_VERSION=1.16
 ENV LC_ALL C
-ENV GOSU_VERSION 1.14
+
 
 # Add groups and users before installing Dovecot to not break compatibility
 RUN groupadd -g 5000 vmail \
@@ -17,6 +22,7 @@ RUN groupadd -g 5000 vmail \
   && touch /etc/default/locale \
   && apt-get update \
   && apt-get -y --no-install-recommends install \
+  build-essential \
   apt-transport-https \
   ca-certificates \
   cpanminus \
@@ -57,6 +63,7 @@ RUN groupadd -g 5000 vmail \
   libproc-processtable-perl \
   libreadonly-perl \
   libregexp-common-perl \
+  libssl-dev \
   libsys-meminfo-perl \
   libterm-readkey-perl \
   libtest-deep-perl \
@@ -87,23 +94,19 @@ RUN groupadd -g 5000 vmail \
   && wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch" \
   && chmod +x /usr/local/bin/gosu \
   && gosu nobody true \
-  && apt-get update \
-  && apt-get -y --no-install-recommends install \
-  dovecot-core \
-  dovecot-auth-lua \
-  dovecot-managesieved \
-  dovecot-sieve \
-  dovecot-lmtpd \
-  dovecot-ldap \
-  dovecot-mysql \
-  dovecot-pop3d \
-  dovecot-imapd \
-  dovecot-solr \
+  && wget https://dovecot.org/releases/${DOVECOT_MAJORMINOR}/dovecot-${DOVECOT}.tar.gz \
+  && tar -xf dovecot-${DOVECOT}.tar.gz \
+  && cd dovecot-${DOVECOT} \
+  && ./configure \
+  && make \
+  && make install \
   && pip3 install mysql-connector-python html2text jinja2 redis \
   && apt-get autoremove --purge -y \
   && apt-get autoclean \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /tmp/* /var/tmp/* /root/.cache/
+# imapsync dependencies
+RUN cpan Crypt::OpenSSL::PKCS12
 
 COPY trim_logs.sh /usr/local/bin/trim_logs.sh
 COPY clean_q_aged.sh /usr/local/bin/clean_q_aged.sh
