@@ -91,6 +91,10 @@ RUN groupadd -g 5000 vmail \
   syslog-ng-core \
   syslog-ng-mod-redis \
   wget \
+  libldap2-dev \
+  liblua5.3-dev \
+  default-libmysqlclient-dev \
+  libexpat1-dev \
   && dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
   && wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch" \
   && chmod +x /usr/local/bin/gosu \
@@ -98,14 +102,14 @@ RUN groupadd -g 5000 vmail \
   && wget https://dovecot.org/releases/${DOVECOT_MAJORMINOR}/dovecot-${DOVECOT}.tar.gz \
   && tar -xf dovecot-${DOVECOT}.tar.gz \
   && cd dovecot-${DOVECOT} \
-  && ./configure \
+  && ./configure --with-solr --with-mysql --with-ldap --with-lua \
   && make \
   && make install \
   && cd .. \
   && wget https://pigeonhole.dovecot.org/releases/${DOVECOT_MAJORMINOR}/dovecot-${DOVECOT_MAJORMINOR}-pigeonhole-${PIGEONHOLE}.tar.gz \
   && tar -xf dovecot-${DOVECOT_MAJORMINOR}-pigeonhole-${PIGEONHOLE}.tar.gz \
   && cd dovecot-${DOVECOT_MAJORMINOR}-pigeonhole-${PIGEONHOLE} \
-  && ./configure \
+  && ./configure --with-ldap \
   && make \
   && make install \
   && cd .. \
