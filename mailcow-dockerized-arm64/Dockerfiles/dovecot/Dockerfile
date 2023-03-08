@@ -95,6 +95,11 @@ RUN groupadd -g 5000 vmail \
   liblua5.3-dev \
   default-libmysqlclient-dev \
   libexpat1-dev \
+  autoconf \
+  automake \
+  pkg-config \ 
+  libtool-bin \ 
+  libltdl-dev \
   && dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
   && wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch" \
   && chmod +x /usr/local/bin/gosu \
