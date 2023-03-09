@@ -151,5 +151,7 @@ COPY repl_health.sh /usr/local/bin/repl_health.sh
 
 RUN ln -s /usr/local/etc/dovecot /etc/dovecot
 
+RUN echo "base_dir = /var/run/dovecot/" >> /etc/dovecot/extra.conf
+
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD exec /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
