@@ -95,6 +95,10 @@ RUN groupadd -g 5000 vmail \
   liblua5.3-dev \
   default-libmysqlclient-dev \
   libexpat1-dev \
+  liblz4-dev \
+  zlib1g-dev \
+  libkrb5-dev \
+  libpam0g-dev \
   autoconf \
   automake \
   pkg-config \ 
@@ -107,7 +111,7 @@ RUN groupadd -g 5000 vmail \
   && wget https://dovecot.org/releases/${DOVECOT_MAJORMINOR}/dovecot-${DOVECOT}.tar.gz \
   && tar -xf dovecot-${DOVECOT}.tar.gz \
   && cd dovecot-${DOVECOT} \
-  && ./configure --with-solr --with-mysql --with-ldap --with-lua \
+  && ./configure --with-solr --with-mysql --with-ldap --with-lua --with-lz4 --with-zlib --with-nss --with-pam --with-gssapi \
   && make \
   && make install \
   && cd .. \
