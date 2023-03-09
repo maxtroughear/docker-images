@@ -149,9 +149,9 @@ COPY quarantine_notify.py /usr/local/bin/quarantine_notify.py
 COPY quota_notify.py /usr/local/bin/quota_notify.py
 COPY repl_health.sh /usr/local/bin/repl_health.sh
 
+RUN mkdir -p /usr/local/var/run/dovecot
+RUN ln -s /usr/local/var/run/dovecot /var/run/dovecot
 RUN ln -s /usr/local/etc/dovecot /etc/dovecot
-
-RUN echo "base_dir = /var/run/dovecot/" >> /etc/dovecot/extra.conf
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD exec /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
