@@ -18,6 +18,8 @@ jobs:
     permissions:
       contents: read
       packages: write
+    env:
+      TAG_SUFFIX: ${{ github.ref == 'refs/heads/main' && '' || '-dev' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3

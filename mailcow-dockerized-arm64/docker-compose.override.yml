@@ -2,52 +2,52 @@ version: '2.1'
 services:
   unbound-mailcow:
     build: ./data/Dockerfiles/unbound
-    image: ghcr.io/maxtroughear/mailcow-unbound:1.17
+    image: ghcr.io/maxtroughear/mailcow-unbound:1.17${TAG_SUFFIX}
 
   clamd-mailcow:
     build: ./data/Dockerfiles/clamd
-    image: ghcr.io/maxtroughear/mailcow-clamd:1.61
+    image: ghcr.io/maxtroughear/mailcow-clamd:1.61${TAG_SUFFIX}
 
   rspamd-mailcow:
     build: ./data/Dockerfiles/rspamd
-    image: ghcr.io/maxtroughear/mailcow-rspamd:1.93
+    image: ghcr.io/maxtroughear/mailcow-rspamd:1.93${TAG_SUFFIX}
 
   php-fpm-mailcow:
     build: ./data/Dockerfiles/phpfpm
-    image: ghcr.io/maxtroughear/mailcow-phpfpm:1.83
+    image: ghcr.io/maxtroughear/mailcow-phpfpm:1.84${TAG_SUFFIX}
 
   sogo-mailcow:
     build: ./data/Dockerfiles/sogo
-    image: ghcr.io/maxtroughear/mailcow-sogo:1.116
+    image: ghcr.io/maxtroughear/mailcow-sogo:1.117${TAG_SUFFIX}
 
   dovecot-mailcow:
     build: ./data/Dockerfiles/dovecot
-    image: ghcr.io/maxtroughear/mailcow-dovecot:1.23
+    image: ghcr.io/maxtroughear/mailcow-dovecot:1.24${TAG_SUFFIX}
 
   postfix-mailcow:
     build: ./data/Dockerfiles/postfix
-    image: ghcr.io/maxtroughear/mailcow-postfix:1.68
+    image: ghcr.io/maxtroughear/mailcow-postfix:1.68${TAG_SUFFIX}
 
   acme-mailcow:
     build: ./data/Dockerfiles/acme
-    image: ghcr.io/maxtroughear/mailcow-acme:1.84
+    image: ghcr.io/maxtroughear/mailcow-acme:1.84${TAG_SUFFIX}
 
   netfilter-mailcow:
     build: ./data/Dockerfiles/netfilter
-    image: ghcr.io/maxtroughear/mailcow-netfilter:1.52
+    image: ghcr.io/maxtroughear/mailcow-netfilter:1.52${TAG_SUFFIX}
 
   watchdog-mailcow:
     build: ./data/Dockerfiles/watchdog
-    image: ghcr.io/maxtroughear/mailcow-watchdog:1.97
+    image: ghcr.io/maxtroughear/mailcow-watchdog:1.97${TAG_SUFFIX}
 
   dockerapi-mailcow:
     build: ./data/Dockerfiles/dockerapi
-    image: ghcr.io/maxtroughear/mailcow-dockerapi:2.0.2
+    image: ghcr.io/maxtroughear/mailcow-dockerapi:2.04${TAG_SUFFIX}
 
   solr-mailcow:
     build: ./data/Dockerfiles/solr
-    image: ghcr.io/maxtroughear/mailcow-solr:1.8.1
+    image: ghcr.io/maxtroughear/mailcow-solr:1.8.1${TAG_SUFFIX}
 
   olefy-mailcow:
     build: ./data/Dockerfiles/olefy
-    image: ghcr.io/maxtroughear/mailcow-olefy:1.11
+    image: ghcr.io/maxtroughear/mailcow-olefy:1.11${TAG_SUFFIX}
