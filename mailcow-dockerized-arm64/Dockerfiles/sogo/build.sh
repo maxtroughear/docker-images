@@ -28,8 +28,8 @@ fi
 
 REPOSITORY_SOGO="https://github.com/Alinto/sogo.git"
 REPOSITORY_SOPE="https://github.com/Alinto/sope.git"
-SOGO_GIT_TAG="master"
-SOPE_GIT_TAG="master"
+SOGO_GIT_TAG="SOGo-$VERSION_TO_BUILD"
+SOPE_GIT_TAG="SOPE-$VERSION_TO_BUILD"
 
 ARCH="$(dpkg --print-architecture)"
 
@@ -61,7 +61,7 @@ apt-get -f install -y
 apt-get install -y python
 
 # Checkout the SOPE repository with the given tag
-git clone --depth 1 --branch "${SOPE_GIT_TAG}" $REPOSITORY_SOPE
+git clone --depth 1 --branch $SOPE_GIT_TAG $REPOSITORY_SOPE
 cd sope
 
 cp -a packaging/debian debian
@@ -76,7 +76,7 @@ cd "$PACKAGES_DIR"
 dpkg -i libsope*.deb
 
 # Checkout the SOGo repository with the given tag
-git clone --depth 1 --branch "${SOGO_GIT_TAG}" $REPOSITORY_SOGO
+git clone --depth 1 --branch $SOGO_GIT_TAG $REPOSITORY_SOGO
 cd sogo
 
 cp -a packaging/debian debian

@@ -18,7 +18,7 @@ RUN chmod +x ./build.sh \
   && ./build.sh
 
 FROM debian:bullseye-slim
-LABEL maintainer "Andre Peters <andre.peters@servercow.de>"
+LABEL maintainer "The Infrastructure Company GmbH <info@servercow.de>"
 
 ARG DEBIAN_FRONTEND=noninteractive
 # renovate: datasource=github-releases depName=tianon/gosu versioning=semver-coerced

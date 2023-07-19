@@ -14,15 +14,15 @@ services:
 
   php-fpm-mailcow:
     build: ./data/Dockerfiles/phpfpm
-    image: ghcr.io/maxtroughear/mailcow-phpfpm:1.83
+    image: ghcr.io/maxtroughear/mailcow-phpfpm:1.84
 
   sogo-mailcow:
     build: ./data/Dockerfiles/sogo
-    image: ghcr.io/maxtroughear/mailcow-sogo:1.116
+    image: ghcr.io/maxtroughear/mailcow-sogo:1.117
 
   dovecot-mailcow:
     build: ./data/Dockerfiles/dovecot
-    image: ghcr.io/maxtroughear/mailcow-dovecot:1.23
+    image: ghcr.io/maxtroughear/mailcow-dovecot:1.24
 
   postfix-mailcow:
     build: ./data/Dockerfiles/postfix
@@ -42,7 +42,7 @@ services:
 
   dockerapi-mailcow:
     build: ./data/Dockerfiles/dockerapi
-    image: ghcr.io/maxtroughear/mailcow-dockerapi:2.0.2
+    image: ghcr.io/maxtroughear/mailcow-dockerapi:2.04
 
   solr-mailcow:
     build: ./data/Dockerfiles/solr
